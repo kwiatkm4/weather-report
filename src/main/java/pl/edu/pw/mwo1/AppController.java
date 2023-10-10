@@ -1,9 +1,8 @@
 package pl.edu.pw.mwo1;
 
-import javafx.event.ActionEvent;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
 public class AppController {
@@ -12,20 +11,34 @@ public class AppController {
     private TextField citySearchbar;
     @FXML
     private Button searchButton;
+    private WeatherService service;
+
+    @FXML
+    public void initialize() {
+        service = new WeatherService();
+    }
 
     @FXML
     public void onCitySearch() {
-        var cityText = citySearchbar.getText();
+        Thread searcher = new Thread(() -> {
+            Platform.runLater(() -> {
+                searchButton.setDisable(true);
+            });
 
-        if (cityText == null || cityText.isEmpty()) {
-            System.out.println("Empty");
-            return;
-        }
+            var cityText = citySearchbar.getText();
 
-        System.out.println(cityText);
+            if (cityText == null || cityText.isEmpty()) {
+                Platform.runLater(() -> {
+                    searchButton.setDisable(false);
+                });
+                return;
+            }
 
-        Thread t = new Thread(() -> {
-            ;
+            Platform.runLater(() -> {
+                searchButton.setDisable(false);
+            });
         });
+
+        searcher.start();
     }
 }
