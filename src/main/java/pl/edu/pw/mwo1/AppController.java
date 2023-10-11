@@ -44,17 +44,13 @@ public class AppController {
         }
 
         Thread searcher = new Thread(() -> {
-            Platform.runLater(() -> {
-                searchButton.setDisable(true);
-            });
+            Platform.runLater(() -> searchButton.setDisable(true));
 
             List<City> cities = service.getCities(cityText);
 
             createSearchResultUI(cities);
 
-            Platform.runLater(() -> {
-                searchButton.setDisable(false);
-            });
+            Platform.runLater(() -> searchButton.setDisable(false));
         });
 
         searcher.start();
@@ -64,9 +60,7 @@ public class AppController {
     private synchronized void createSearchResultUI(List<City> cities) {
         int cityCount = cities != null ? cities.size() : 0;
 
-        Platform.runLater(() -> {
-            cityCountLabel.setText(String.format(CITY_COUNT_TEMPLATE, cityCount));
-        });
+        Platform.runLater(() -> cityCountLabel.setText(String.format(CITY_COUNT_TEMPLATE, cityCount)));
 
         if (cities == null || cities.isEmpty()) {
             toggleWeatherUI(false);
@@ -89,9 +83,7 @@ public class AppController {
     }
 
     private synchronized void toggleInfoHeader(boolean isShown) {
-        Platform.runLater(() -> {
-            infoHeader.setVisible(isShown);
-        });
+        Platform.runLater(() -> infoHeader.setVisible(isShown));
     }
 
     @FXML
@@ -137,9 +129,7 @@ public class AppController {
                 }
             }
 
-            Platform.runLater(()-> {
-                weatherInfo.setText(report.toString());
-            });
+            Platform.runLater(()-> weatherInfo.setText(report.toString()));
         });
 
         reporter.start();
