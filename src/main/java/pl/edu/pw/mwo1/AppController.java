@@ -82,8 +82,11 @@ public class AppController {
         });
     }
 
-    private synchronized void toggleInfoHeader(boolean isShown) {
-        Platform.runLater(() -> infoHeader.setVisible(isShown));
+    private synchronized void toggleButtons(boolean isDisabled) {
+        Platform.runLater(() -> {
+            weatherButton.setDisable(isDisabled);
+            searchButton.setDisable(isDisabled);
+        });
     }
 
     @FXML
@@ -95,12 +98,13 @@ public class AppController {
         }
 
         Thread reporter = new Thread(() -> {
+            toggleButtons(true);
+            Platform.runLater(() -> infoHeader.setVisible(true));
+
             var conditions = service.getCurrentConditions(chosenCityId);
             var alarm = service.getAlarms(chosenCityId);
             var forecast = service.getForecast(chosenCityId);
             var indices = service.getIndices(chosenCityId);
-
-            toggleInfoHeader(true);
 
             var report = new StringBuilder();
 
@@ -129,7 +133,16 @@ public class AppController {
                 }
             }
 
-            Platform.runLater(()-> weatherInfo.setText(report.toString()));
+            Platform.runLater(() ->
+            {
+                if (report.isEmpty()) {
+                    weatherInfo.setText("No info found.");
+                } else {
+                    weatherInfo.setText(report.toString());
+                }
+            });
+
+            toggleButtons(false);
         });
 
         reporter.start();
