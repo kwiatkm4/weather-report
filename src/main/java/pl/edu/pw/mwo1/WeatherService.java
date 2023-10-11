@@ -35,83 +35,56 @@ public class WeatherService {
 
         String response = sendRequest(uriBuilder);
 
-        if (response == null) {
-            return null;
-        }
-
         try {
             ObjectMapper mapper = new ObjectMapper();
 
-            return mapper.readValue(response, new TypeReference<>() {
-            });
+            return response != null ? mapper.readValue(response, new TypeReference<>() {
+            }) : null;
         } catch (Exception e) {
-            e.printStackTrace();
-
             return null;
         }
     }
 
     public synchronized List<CurrentConditions> getCurrentConditions(String key) {
-        String uriBuilder = BASE_URL +
-                String.format(CURR_COND_ENDPOINT, key, API_KEY);
+        String uriBuilder = BASE_URL + String.format(CURR_COND_ENDPOINT, key, API_KEY);
 
         String response = sendRequest(uriBuilder);
-
-        if (response == null) {
-            return null;
-        }
 
         try {
             ObjectMapper mapper = new ObjectMapper();
 
-            return mapper.readValue(response, new TypeReference<>() {
-            });
+            return response != null ? mapper.readValue(response, new TypeReference<>() {
+            }) : null;
         } catch (Exception e) {
-            e.printStackTrace();
-
             return null;
         }
     }
 
     public synchronized List<Index> getIndices(String key) {
-        String uriBuilder = BASE_URL +
-                String.format(INDEX_ENDPOINT, key, API_KEY);
+        String uriBuilder = BASE_URL + String.format(INDEX_ENDPOINT, key, API_KEY);
 
         String response = sendRequest(uriBuilder);
-
-        if (response == null) {
-            return null;
-        }
 
         try {
             ObjectMapper mapper = new ObjectMapper();
 
-            return mapper.readValue(response, new TypeReference<>() {
-            });
+            return response != null ? mapper.readValue(response, new TypeReference<>() {
+            }) : null;
         } catch (Exception e) {
-            e.printStackTrace();
-
             return null;
         }
     }
 
     public synchronized Forecast getForecast(String key) {
-        String uriBuilder = BASE_URL +
-                String.format(FORECAST_ENDPOINT, key, API_KEY);
+        String uriBuilder = BASE_URL + String.format(FORECAST_ENDPOINT, key, API_KEY);
 
         String response = sendRequest(uriBuilder);
-
-        if (response == null) {
-            return null;
-        }
 
         try {
             ObjectMapper mapper = new ObjectMapper();
 
-            return mapper.readValue(response, Forecast.class);
+            return response != null ? mapper.readValue(response, Forecast.class) : null;
         } catch (Exception e) {
-            e.printStackTrace();
-
             return null;
         }
     }
@@ -132,8 +105,6 @@ public class WeatherService {
             return mapper.readValue(response, new TypeReference<>() {
             });
         } catch (Exception e) {
-            e.printStackTrace();
-
             return null;
         }
     }
@@ -150,8 +121,6 @@ public class WeatherService {
             return response.body();
 
         } catch (Exception e) {
-            e.printStackTrace();
-
             return null;
         }
     }
