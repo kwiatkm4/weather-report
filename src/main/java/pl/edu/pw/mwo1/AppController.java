@@ -7,12 +7,16 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import pl.edu.pw.mwo1.models.City;
+import pl.edu.pw.mwo1.models.*;
 
 import java.util.List;
 
 public class AppController {
 
+    @FXML
+    private Label infoHeader;
+    @FXML
+    private Label weatherInfo;
     @FXML
     private Button weatherButton;
     @FXML
@@ -84,12 +88,58 @@ public class AppController {
         });
     }
 
+    private synchronized void toggleInfoHeader(boolean isShown) {
+        Platform.runLater(() -> {
+            infoHeader.setVisible(isShown);
+        });
+    }
+
     @FXML
     public void onWeatherInfoSearch() {
         String chosenCityId = cityList.getValue().key;
 
-        Thread reporter = new Thread(() -> {
+        if (chosenCityId == null || chosenCityId.isEmpty()) {
+            return;
+        }
 
+        Thread reporter = new Thread(() -> {
+            var conditions = service.getCurrentConditions(chosenCityId);
+            var alarm = service.getAlarms(chosenCityId);
+            var forecast = service.getForecast(chosenCityId);
+            var indices = service.getIndices(chosenCityId);
+
+            toggleInfoHeader(true);
+
+            var report = new StringBuilder();
+
+            if (conditions != null) {
+                for (CurrentConditions c : conditions) {
+                    report.append(String.format("Current weather: %s, %g %s\n", c.weatherText, c.temperature.metric.value, c.temperature.metric.unit));
+                }
+
+                report.append("\n");
+            }
+
+            if (alarm != null) {
+                report.append(String.format("%d alarms issued for the city.\n\n", alarm.size()));
+            }
+
+            if (forecast != null) {
+                report.append(String.format("Forecast for %s: %s\n\n", forecast.headline.effectiveDate, forecast.headline.text));
+            }
+
+            if (indices != null) {
+                int toDisplay = Math.min(indices.size(), 5);
+
+                for (int i = 0; i < toDisplay; i++) {
+                    Index curr = indices.get(i);
+                    report.append(String.format("State for index %s on %s: %s\n", curr.name, curr.localDateTime, curr.category));
+                }
+            }
+
+            Platform.runLater(()-> {
+                weatherInfo.setText(report.toString());
+            });
         });
 
         reporter.start();

@@ -35,6 +35,10 @@ public class WeatherService {
 
         String response = sendRequest(uriBuilder);
 
+        if (response == null) {
+            return null;
+        }
+
         try {
             ObjectMapper mapper = new ObjectMapper();
 
@@ -53,10 +57,15 @@ public class WeatherService {
 
         String response = sendRequest(uriBuilder);
 
+        if (response == null) {
+            return null;
+        }
+
         try {
             ObjectMapper mapper = new ObjectMapper();
 
-            return mapper.readValue(response, new TypeReference<>() {});
+            return mapper.readValue(response, new TypeReference<>() {
+            });
         } catch (Exception e) {
             e.printStackTrace();
 
@@ -70,10 +79,15 @@ public class WeatherService {
 
         String response = sendRequest(uriBuilder);
 
+        if (response == null) {
+            return null;
+        }
+
         try {
             ObjectMapper mapper = new ObjectMapper();
 
-            return mapper.readValue(response, new TypeReference<>() {});
+            return mapper.readValue(response, new TypeReference<>() {
+            });
         } catch (Exception e) {
             e.printStackTrace();
 
@@ -87,6 +101,10 @@ public class WeatherService {
 
         String response = sendRequest(uriBuilder);
 
+        if (response == null) {
+            return null;
+        }
+
         try {
             ObjectMapper mapper = new ObjectMapper();
 
@@ -98,16 +116,21 @@ public class WeatherService {
         }
     }
 
-    public synchronized Alarm getAlarms(String key) {
+    public synchronized List<Alarm> getAlarms(String key) {
         String uriBuilder = BASE_URL +
                 String.format(ALARM_ENDPOINT, key, API_KEY);
 
         String response = sendRequest(uriBuilder);
 
+        if (response == null) {
+            return null;
+        }
+
         try {
             ObjectMapper mapper = new ObjectMapper();
 
-            return mapper.readValue(response, Alarm.class);
+            return mapper.readValue(response, new TypeReference<>() {
+            });
         } catch (Exception e) {
             e.printStackTrace();
 
