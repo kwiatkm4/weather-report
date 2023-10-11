@@ -5,8 +5,8 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<VBox fx:controller="pl.edu.pw.mwo1.AppController" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1">
-    <Label alignment="CENTER" contentDisplay="CENTER" prefWidth="800.0" text="Weather Report" textAlignment="CENTER">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.edu.pw.mwo1.AppController">
+    <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="60.0" prefWidth="800.0" text="Weather Report" textAlignment="CENTER">
         <font>
           <Font name="System Bold" size="27.0" />
         </font>
@@ -17,27 +17,53 @@
     <HBox prefHeight="100.0" prefWidth="200.0">
         <Label text="Search for cities:">
            <HBox.margin>
-               <Insets bottom="40.0" left="40.0" right="40.0" top="40.0"/>
+               <Insets bottom="40.0" left="40.0" right="40.0" top="40.0" />
            </HBox.margin>
            <font>
-               <Font size="18.0"/>
+               <Font size="18.0" />
            </font>
         </Label>
         <TextField fx:id="citySearchbar" promptText="enter city name...">
            <font>
-               <Font size="15.0"/>
+               <Font size="15.0" />
            </font>
            <HBox.margin>
-               <Insets bottom="40.0" left="70.0" right="30.0" top="40.0"/>
+               <Insets bottom="40.0" left="70.0" right="30.0" top="40.0" />
            </HBox.margin>
         </TextField>
-        <Button fx:id="searchButton" onAction="#onCitySearch" mnemonicParsing="false" text="Search">
+        <Button fx:id="searchButton" mnemonicParsing="false" onAction="#onCitySearch" text="Search">
            <font>
-               <Font size="15.0"/>
+               <Font size="15.0" />
            </font>
            <HBox.margin>
-               <Insets bottom="40.0" left="10.0" top="40.0"/>
+               <Insets bottom="40.0" left="10.0" top="40.0" />
            </HBox.margin>
         </Button>
+    </HBox>
+    <HBox prefHeight="480.0" prefWidth="800.0">
+        <VBox prefHeight="480.0" prefWidth="300.0">
+            <Label fx:id="cityCountLabel" textAlignment="CENTER">
+                <VBox.margin>
+                    <Insets bottom="40.0" left="40.0" top="20.0" />
+                </VBox.margin>
+                <font>
+                    <Font name="System Italic" size="16.0" />
+                </font>
+            </Label>
+            <ChoiceBox fx:id="cityList" prefWidth="200.0" visible="false">
+                <VBox.margin>
+                    <Insets left="40.0" />
+                </VBox.margin>
+            </ChoiceBox>
+         <Button fx:id="weatherButton" onAction="#onWeatherInfoSearch" mnemonicParsing="false" text="Get weather info" visible="false">
+            <font>
+               <Font size="15.0" />
+            </font>
+            <VBox.margin>
+               <Insets left="40.0" top="60.0" />
+            </VBox.margin>
+         </Button>
+        </VBox>
+        <VBox prefHeight="480.0" prefWidth="500.0" />
     </HBox>
 </VBox>

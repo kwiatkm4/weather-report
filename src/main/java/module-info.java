@@ -6,7 +6,9 @@ module pl.edu.pw.mwo1 {
     requires net.synedra.validatorfx;
     requires java.net.http;
     requires com.fasterxml.jackson.annotation;
+    requires com.fasterxml.jackson.databind;
 
     opens pl.edu.pw.mwo1 to javafx.fxml;
     exports pl.edu.pw.mwo1;
+    exports pl.edu.pw.mwo1.models;
 }

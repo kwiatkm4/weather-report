@@ -11,4 +11,9 @@ public class City{
     public String localizedName;
     @JsonProperty("Country")
     public Country country;
+
+    @Override
+    public String toString() {
+        return localizedName;
+    }
 }
