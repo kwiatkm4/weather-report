@@ -65,21 +65,45 @@
          </Button>
         </VBox>
         <VBox prefHeight="480.0" prefWidth="500.0">
-            <Label fx:id="infoHeader" text="Weather info:" visible="false">
+            <Label fx:id="infoHeader">
                 <font>
-                    <Font size="15.0" />
+                    <Font name="System Bold" size="15.0" />
                 </font>
                 <VBox.margin>
                     <Insets left="30.0" top="20.0" />
                 </VBox.margin>
             </Label>
-            <Label fx:id="weatherInfo" wrapText="true">
+            <Label fx:id="conditionInfo" wrapText="true">
                 <VBox.margin>
-                    <Insets left="30.0" top="30.0" />
+                    <Insets left="30.0" top="20.0" />
                 </VBox.margin>
             <padding>
                <Insets right="20.0" />
             </padding>
+            </Label>
+            <Label fx:id="alarmInfo" wrapText="true">
+                <VBox.margin>
+                    <Insets left="30.0" top="20.0" />
+                </VBox.margin>
+                <padding>
+                    <Insets right="20.0" />
+                </padding>
+            </Label>
+            <Label fx:id="forecastInfo" wrapText="true">
+                <VBox.margin>
+                    <Insets left="30.0" top="20.0" />
+                </VBox.margin>
+                <padding>
+                    <Insets right="20.0" />
+                </padding>
+            </Label>
+            <Label fx:id="indexInfo" wrapText="true">
+                <VBox.margin>
+                    <Insets left="30.0" top="20.0" />
+                </VBox.margin>
+                <padding>
+                    <Insets right="20.0" />
+                </padding>
             </Label>
         </VBox>
     </HBox>

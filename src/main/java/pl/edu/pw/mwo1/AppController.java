@@ -16,7 +16,13 @@ public class AppController {
     @FXML
     private Label infoHeader;
     @FXML
-    private Label weatherInfo;
+    private Label conditionInfo;
+    @FXML
+    private Label forecastInfo;
+    @FXML
+    private Label alarmInfo;
+    @FXML
+    private Label indexInfo;
     @FXML
     private Button weatherButton;
     @FXML
@@ -28,7 +34,6 @@ public class AppController {
     @FXML
     private Button searchButton;
     private WeatherService service;
-    private final static String CITY_COUNT_TEMPLATE = "Found %d cities:";
 
     @FXML
     public void initialize() {
@@ -60,7 +65,7 @@ public class AppController {
     private synchronized void createSearchResultUI(List<City> cities) {
         int cityCount = cities != null ? cities.size() : 0;
 
-        Platform.runLater(() -> cityCountLabel.setText(String.format(CITY_COUNT_TEMPLATE, cityCount)));
+        Platform.runLater(() -> cityCountLabel.setText(String.format("Found %d cities:", cityCount)));
 
         if (cities == null || cities.isEmpty()) {
             toggleWeatherUI(false);
@@ -99,52 +104,83 @@ public class AppController {
 
         Thread reporter = new Thread(() -> {
             toggleButtons(true);
-            Platform.runLater(() -> infoHeader.setVisible(true));
+            clearWeatherInfo();
 
-            var conditions = service.getCurrentConditions(chosenCityId);
-            var alarm = service.getAlarms(chosenCityId);
-            var forecast = service.getForecast(chosenCityId);
-            var indices = service.getIndices(chosenCityId);
+            Platform.runLater(() -> infoHeader.setText(String.format("Weather info for %s:", cityList.getValue().localizedName)));
 
-            var report = new StringBuilder();
-
-            if (conditions != null) {
-                for (CurrentConditions c : conditions) {
-                    report.append(String.format("Current weather: %s, %g %s\n", c.weatherText, c.temperature.metric.value, c.temperature.metric.unit));
-                }
-
-                report.append("\n");
-            }
-
-            if (alarm != null) {
-                report.append(String.format("%d alarms issued for the city.\n\n", alarm.size()));
-            }
-
-            if (forecast != null) {
-                report.append(String.format("Forecast for %s: %s\n\n", forecast.headline.effectiveDate, forecast.headline.text));
-            }
-
-            if (indices != null) {
-                int toDisplay = Math.min(indices.size(), 5);
-
-                for (int i = 0; i < toDisplay; i++) {
-                    Index curr = indices.get(i);
-                    report.append(String.format("State for index %s on %s: %s\n", curr.name, curr.localDateTime, curr.category));
-                }
-            }
-
-            Platform.runLater(() ->
-            {
-                if (report.isEmpty()) {
-                    weatherInfo.setText("No info found.");
-                } else {
-                    weatherInfo.setText(report.toString());
-                }
-            });
+            findConditions(chosenCityId);
+            findAlarms(chosenCityId);
+            findForecast(chosenCityId);
+            findIndexes(chosenCityId);
 
             toggleButtons(false);
         });
 
         reporter.start();
+    }
+
+    @FXML
+    private void clearWeatherInfo() {
+        Platform.runLater(() -> {
+            conditionInfo.setText("");
+            indexInfo.setText("");
+            forecastInfo.setText("");
+            alarmInfo.setText("");
+        });
+    }
+
+    @FXML
+    private void findConditions(String key) {
+        var conditions = service.getCurrentConditions(key);
+
+        if (conditions != null) {
+            var conditionReport = new StringBuilder();
+
+            for (CurrentConditions c : conditions) {
+                conditionReport.append(String.format("Current weather: %s, %g %s\n", c.weatherText, c.temperature.metric.value, c.temperature.metric.unit));
+            }
+
+            Platform.runLater(() -> conditionInfo.setText(conditionReport.toString()));
+        } else {
+            Platform.runLater(() -> conditionInfo.setText("Failed to get current conditions."));
+        }
+    }
+
+    @FXML
+    private void findAlarms(String key) {
+        var alarms = service.getAlarms(key);
+        var alarmText = alarms != null ? String.format("%d alarms issued for the city.", alarms.size()) :
+                "Failed to get alarms.";
+
+        Platform.runLater(() -> alarmInfo.setText(alarmText));
+    }
+
+    @FXML
+    private void findForecast(String key) {
+        var forecast = service.getForecast(key);
+        var forecastText = forecast != null ?
+                String.format("Forecast for %s: %s\n\n", forecast.headline.effectiveDate, forecast.headline.text) :
+                "Failed to get forecast.";
+
+        Platform.runLater(() -> forecastInfo.setText(forecastText));
+    }
+
+    @FXML
+    private void findIndexes(String key) {
+        var indices = service.getIndices(key);
+
+        if (indices != null) {
+            var indexText = new StringBuilder();
+            int toDisplay = Math.min(indices.size(), 5);
+
+            for (int i = 0; i < toDisplay; i++) {
+                Index curr = indices.get(i);
+                indexText.append(String.format("State for index %s on %s: %s\n", curr.name, curr.localDateTime, curr.category));
+            }
+
+            Platform.runLater(() -> indexInfo.setText(indexText.toString()));
+        } else {
+            Platform.runLater(() -> indexInfo.setText("Failed to get indexes."));
+        }
     }
 }

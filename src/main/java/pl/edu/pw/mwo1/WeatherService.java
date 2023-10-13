@@ -17,11 +17,11 @@ public class WeatherService {
     private final HttpClient client;
     private final static String API_KEY = "";
     private final static String BASE_URL = "http://dataservice.accuweather.com/";
-    private final static String CITY_ENDPOINT = "locations/v1/cities/autocomplete?apikey=%s&language=pl-pl&q=%s";
-    private final static String CURR_COND_ENDPOINT = "/currentconditions/v1/%s?apikey=%s&language=pl-pl";
-    private final static String INDEX_ENDPOINT = "indices/v1/daily/1day/%s?apikey=%s&language=pl-pl";
-    private final static String FORECAST_ENDPOINT = "forecasts/v1/daily/1day/%s?apikey=%s&language=pl-pl&metric=true";
-    private final static String ALARM_ENDPOINT = "alarms/v1/1day/%s?apikey=%s&language=pl-pl";
+    private final static String CITY_ENDPOINT = "locations/v1/cities/autocomplete?apikey=%s&language=en-us&q=%s";
+    private final static String CURR_COND_ENDPOINT = "/currentconditions/v1/%s?apikey=%s&language=en-us";
+    private final static String INDEX_ENDPOINT = "indices/v1/daily/1day/%s?apikey=%s&language=en-us";
+    private final static String FORECAST_ENDPOINT = "forecasts/v1/daily/1day/%s?apikey=%s&language=en-us&metric=true";
+    private final static String ALARM_ENDPOINT = "alarms/v1/1day/%s?apikey=%s&language=en-us";
 
 
     public WeatherService() {
