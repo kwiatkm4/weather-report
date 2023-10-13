@@ -4,13 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ddb9cae4-fa22-4bca-a215-00e449c6914f" name="Changes" comment="Ignore unused properties in models">
+    <list default="true" id="ddb9cae4-fa22-4bca-a215-00e449c6914f" name="Changes" comment="Improve UI">
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pw/mwo1/AppController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/edu/pw/mwo1/AppController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pw/mwo1/WeatherService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/edu/pw/mwo1/WeatherService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pw/mwo1/models/City.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/edu/pw/mwo1/models/City.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/pl/edu/pw/mwo1/main-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pl/edu/pw/mwo1/main-view.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,21 +36,28 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "master",
+    "ignore.virus.scanning.warn.message": "true",
+    "last_opened_file_path": "C:/Users/mateu/Desktop/MWO1",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "settings.editor.selected.configurable": "Errors",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="pl.edu.pw.mwo1.models" />
+    </key>
+  </component>
   <component name="RunManager">
     <configuration name="WeatherReport" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="pl.edu.pw.mwo1.WeatherReport" />
@@ -84,7 +91,10 @@
       <workItem from="1696966234258" duration="6004000" />
       <workItem from="1697020012948" duration="92000" />
       <workItem from="1697030112638" duration="503000" />
-      <workItem from="1697043198005" duration="3523000" />
+      <workItem from="1697043198005" duration="13755000" />
+      <workItem from="1697059121315" duration="408000" />
+      <workItem from="1697201346056" duration="16000" />
+      <workItem from="1697219354222" duration="6195000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit">
       <option name="closed" value="true" />
@@ -142,11 +152,94 @@
       <option name="project" value="LOCAL" />
       <updated>1696973535849</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Implement city search UI">
+      <option name="closed" value="true" />
+      <created>1697046786302</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1697046786302</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Add required models">
+      <option name="closed" value="true" />
+      <created>1697049473747</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1697049473747</updated>
+    </task>
+    <task id="LOCAL-00010" summary="Implement entire WeatherService">
+      <option name="closed" value="true" />
+      <created>1697050564394</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1697050564394</updated>
+    </task>
+    <task id="LOCAL-00011" summary="Implement everything else">
+      <option name="closed" value="true" />
+      <created>1697054478497</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1697054478497</updated>
+    </task>
+    <task id="LOCAL-00012" summary="Improve UI a bit">
+      <option name="closed" value="true" />
+      <created>1697054631008</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1697054631008</updated>
+    </task>
+    <task id="LOCAL-00013" summary="Use inline lambdas">
+      <option name="closed" value="true" />
+      <created>1697054811688</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1697054811688</updated>
+    </task>
+    <task id="LOCAL-00014" summary="Improve WeatherService">
+      <option name="closed" value="true" />
+      <created>1697057947723</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1697057947723</updated>
+    </task>
+    <task id="LOCAL-00015" summary="Improve report display">
+      <option name="closed" value="true" />
+      <created>1697058958587</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1697058958587</updated>
+    </task>
+    <task id="LOCAL-00016" summary="Improve UI">
+      <option name="closed" value="true" />
+      <created>1697223871040</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1697223871040</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Initial commit" />
@@ -156,6 +249,19 @@
     <MESSAGE value="Add models for city" />
     <MESSAGE value="Add IDE configuration" />
     <MESSAGE value="Ignore unused properties in models" />
-    <option name="LAST_COMMIT_MESSAGE" value="Ignore unused properties in models" />
+    <MESSAGE value="Implement city search UI" />
+    <MESSAGE value="Add required models" />
+    <MESSAGE value="Implement entire WeatherService" />
+    <MESSAGE value="Implement everything else" />
+    <MESSAGE value="Improve UI a bit" />
+    <MESSAGE value="Use inline lambdas" />
+    <MESSAGE value="Improve WeatherService" />
+    <MESSAGE value="Improve report display" />
+    <MESSAGE value="Improve UI" />
+    <option name="LAST_COMMIT_MESSAGE" value="Improve UI" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>
