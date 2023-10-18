@@ -4,6 +4,8 @@ import javafx.application.Platform;
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import pl.edu.pw.mwo1.models.City;
+import pl.edu.pw.mwo1.models.CurrentConditions;
+import pl.edu.pw.mwo1.models.Index;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -70,16 +72,51 @@ public class WeatherViewModel {
         searcher.start();
     }
 
+    public void weatherInfo(City city) {
+        String chosenCityId = city.key;
+
+        if (chosenCityId == null || chosenCityId.isEmpty()) {
+            return;
+        }
+
+        Thread reporter = new Thread(() -> {
+            Platform.runLater(() -> {
+                disableButtons(true);
+                clearWeatherInfo();
+
+                infoHeader.setValue(String.format("Weather info for %s:", city.localizedName));
+            });
+
+            findConditions(chosenCityId);
+            findAlarms(chosenCityId);
+            findForecast(chosenCityId);
+            findIndexes(chosenCityId);
+
+            Platform.runLater(() -> disableButtons(false));
+        });
+
+        reporter.start();
+    }
+
+    private void clearWeatherInfo() {
+        conditionInfo.setValue("");
+        indexInfo.setValue("");
+        forecastInfo.setValue("");
+        alarmInfo.setValue("");
+    }
+
     private void toggleWeatherUI(boolean isShown) {
         isCityListVisible.setValue(isShown);
         isWeatherSearchVisible.setValue(isShown);
     }
 
-    public ListProperty<City> citiesProperty() {
-        return cities;
+    private void disableButtons(boolean isShown) {
+        isSearchDisabled.setValue(isShown);
+        isWeatherSearchDisabled.setValue(isShown);
     }
 
-    public void weatherInfo(City city) {
+    public ListProperty<City> citiesProperty() {
+        return cities;
     }
 
     public BooleanProperty isSearchDisabledProperty() {
@@ -120,5 +157,56 @@ public class WeatherViewModel {
 
     public StringProperty alarmInfoProperty() {
         return alarmInfo;
+    }
+
+    private void findConditions(String key) {
+        var conditions = service.getCurrentConditions(key);
+
+        if (conditions != null) {
+            var conditionReport = new StringBuilder();
+
+            for (CurrentConditions c : conditions) {
+                conditionReport.append(String.format("Current weather: %s, %g %s\n", c.weatherText, c.temperature.metric.value, c.temperature.metric.unit));
+            }
+
+            Platform.runLater(() -> conditionInfo.setValue(conditionReport.toString()));
+        } else {
+            Platform.runLater(() -> conditionInfo.setValue("Failed to get current conditions."));
+        }
+    }
+
+    private void findAlarms(String key) {
+        var alarms = service.getAlarms(key);
+        var alarmText = alarms != null ? String.format("%d alarms issued for the city.", alarms.size()) :
+                "Failed to get alarms.";
+
+        Platform.runLater(() -> alarmInfo.setValue(alarmText));
+    }
+
+    private void findForecast(String key) {
+        var forecast = service.getForecast(key);
+        var forecastText = forecast != null ?
+                String.format("Forecast for %s: %s\n\n", forecast.headline.effectiveDate, forecast.headline.text) :
+                "Failed to get forecast.";
+
+        Platform.runLater(() -> forecastInfo.setValue(forecastText));
+    }
+
+    private void findIndexes(String key) {
+        var indices = service.getIndices(key);
+
+        if (indices != null) {
+            var indexText = new StringBuilder();
+            int toDisplay = Math.min(indices.size(), 5);
+
+            for (int i = 0; i < toDisplay; i++) {
+                Index curr = indices.get(i);
+                indexText.append(String.format("State for index %s on %s: %s\n", curr.name, curr.localDateTime, curr.category));
+            }
+
+            Platform.runLater(() -> indexInfo.setValue(indexText.toString()));
+        } else {
+            Platform.runLater(() -> indexInfo.setValue("Failed to get indexes."));
+        }
     }
 }
