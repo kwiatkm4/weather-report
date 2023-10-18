@@ -36,57 +36,29 @@ public class WeatherController {
     private WeatherService service;
     private WeatherViewModel viewModel;
 
-    @FXML
     public void initialize(WeatherViewModel viewModel) {
         service = new WeatherService();
         this.viewModel = viewModel;
+
+        cityList.itemsProperty().bind(viewModel.citiesProperty());
+        searchButton.disableProperty().bind(viewModel.isSearchDisabledProperty());
+        cityCountLabel.textProperty().bind(viewModel.searchResultsProperty());
+        weatherButton.disableProperty().bind(viewModel.isWeatherSearchDisabledProperty());
+        weatherButton.visibleProperty().bind(viewModel.isWeatherSearchVisibleProperty());
+        cityList.visibleProperty().bind(viewModel.isCityListVisibleProperty());
+        infoHeader.textProperty().bind(viewModel.infoHeaderProperty());
+        forecastInfo.textProperty().bind(viewModel.forecastInfoProperty());
+        alarmInfo.textProperty().bind(viewModel.alarmInfoProperty());
+        indexInfo.textProperty().bind(viewModel.indexInfoProperty());
+        conditionInfo.textProperty().bind(viewModel.conditionInfoProperty());
     }
 
-    @FXML
     public void onCitySearch() {
-        var cityText = citySearchbar.getText();
-
-        if (cityText == null || cityText.isEmpty()) {
-            return;
-        }
-
-        Thread searcher = new Thread(() -> {
-            Platform.runLater(() -> searchButton.setDisable(true));
-
-            List<City> cities = service.getCities(cityText);
-
-            createSearchResultUI(cities);
-
-            Platform.runLater(() -> searchButton.setDisable(false));
-        });
-
-        searcher.start();
+        viewModel.citySearch(citySearchbar.getText());
     }
 
-
-    private synchronized void createSearchResultUI(List<City> cities) {
-        int cityCount = cities != null ? cities.size() : 0;
-
-        Platform.runLater(() -> cityCountLabel.setText(String.format("Found %d cities:", cityCount)));
-
-        if (cities == null || cities.isEmpty()) {
-            toggleWeatherUI(false);
-            return;
-        }
-
-        toggleWeatherUI(true);
-
-        Platform.runLater(() -> {
-            cityList.setItems(FXCollections.observableList(cities));
-            cityList.setValue(cities.get(0));
-        });
-    }
-
-    private synchronized void toggleWeatherUI(boolean isShown) {
-        Platform.runLater(() -> {
-            weatherButton.setVisible(isShown);
-            cityList.setVisible(isShown);
-        });
+    public void onWeatherInfoSearchNew() {
+        viewModel.weatherInfo(cityList.getValue());
     }
 
     private synchronized void toggleButtons(boolean isDisabled) {
