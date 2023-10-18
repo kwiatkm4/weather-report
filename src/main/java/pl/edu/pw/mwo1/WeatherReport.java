@@ -10,8 +10,10 @@ import java.io.IOException;
 public class WeatherReport extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(WeatherReport.class.getResource("main-view.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(WeatherReport.class.getResource("weather-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 800, 640);
+
+
 
         stage.setTitle("Weather Report");
         stage.setResizable(false);

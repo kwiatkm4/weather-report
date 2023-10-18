@@ -11,7 +11,7 @@ import pl.edu.pw.mwo1.models.*;
 
 import java.util.List;
 
-public class AppController {
+public class WeatherController {
 
     @FXML
     private Label infoHeader;
