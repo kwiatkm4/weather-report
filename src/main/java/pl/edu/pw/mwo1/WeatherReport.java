@@ -9,8 +9,7 @@ import java.io.IOException;
 public class WeatherReport extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        WeatherService service = new WeatherService();
-        WeatherViewHandler handler = new WeatherViewHandler(service);
+        WeatherViewHandler handler = new WeatherViewHandler();
         Scene scene = handler.getWeatherScene();
 
         stage.setTitle("Weather Report");

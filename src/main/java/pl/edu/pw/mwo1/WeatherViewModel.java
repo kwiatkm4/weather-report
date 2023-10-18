@@ -1,5 +1,6 @@
 package pl.edu.pw.mwo1;
 
+import com.google.inject.Inject;
 import javafx.application.Platform;
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
@@ -24,6 +25,7 @@ public class WeatherViewModel {
     private final StringProperty indexInfo;
     private final StringProperty alarmInfo;
 
+    @Inject
     public WeatherViewModel(WeatherService service) {
         this.service = service;
 

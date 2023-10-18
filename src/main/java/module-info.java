@@ -7,6 +7,7 @@ module pl.edu.pw.mwo1 {
     requires java.net.http;
     requires com.fasterxml.jackson.annotation;
     requires com.fasterxml.jackson.databind;
+    requires com.google.guice;
 
     opens pl.edu.pw.mwo1 to javafx.fxml;
     exports pl.edu.pw.mwo1;
