@@ -1,7 +1,6 @@
 package pl.edu.pw.mwo1;
 
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
@@ -10,10 +9,9 @@ import java.io.IOException;
 public class WeatherReport extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(WeatherReport.class.getResource("weather-view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 800, 640);
-
-
+        WeatherService service = new WeatherService();
+        WeatherViewHandler handler = new WeatherViewHandler(service);
+        Scene scene = handler.getWeatherScene();
 
         stage.setTitle("Weather Report");
         stage.setResizable(false);

@@ -34,10 +34,12 @@ public class WeatherController {
     @FXML
     private Button searchButton;
     private WeatherService service;
+    private WeatherViewModel viewModel;
 
     @FXML
-    public void initialize() {
+    public void initialize(WeatherViewModel viewModel) {
         service = new WeatherService();
+        this.viewModel = viewModel;
     }
 
     @FXML
