@@ -6,6 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 
 import java.io.IOException;
+import java.lang.reflect.Constructor;
 
 public class WeatherViewHandler {
     private final static String VIEW_NAME = "weather-view.fxml";
@@ -14,13 +15,24 @@ public class WeatherViewHandler {
 
     public Scene getWeatherScene() throws IOException {
         FXMLLoader loader = new FXMLLoader(WeatherReport.class.getResource(VIEW_NAME));
-        Scene scene = new Scene(loader.load(), WIDTH, HEIGHT);
 
-        WeatherController controller = loader.getController();
         Injector injector = Guice.createInjector(new WeatherModule());
         WeatherViewModel viewModel = injector.getInstance(WeatherViewModel.class);
-        controller.initialize(viewModel);
 
-        return scene;
+        loader.setControllerFactory((Class<?> type) -> {
+            try {
+                for (Constructor<?> c : type.getConstructors()) {
+                    if (c.getParameterCount() == 1 && c.getParameterTypes()[0] == WeatherViewModel.class) {
+                        return c.newInstance(viewModel);
+                    }
+                }
+
+                return type.newInstance();
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        });
+
+        return new Scene(loader.load(), WIDTH, HEIGHT);
     }
 }

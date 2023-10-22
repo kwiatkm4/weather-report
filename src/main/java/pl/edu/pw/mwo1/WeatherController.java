@@ -29,11 +29,13 @@ public class WeatherController {
     private TextField citySearchbar;
     @FXML
     private Button searchButton;
-    private WeatherViewModel viewModel;
+    private final WeatherViewModel viewModel;
 
-    public void initialize(WeatherViewModel viewModel) {
+    public WeatherController(WeatherViewModel viewModel) {
         this.viewModel = viewModel;
+    }
 
+    public void initialize() {
         cityList.itemsProperty().bind(viewModel.citiesProperty());
         searchButton.disableProperty().bind(viewModel.isSearchDisabledProperty());
         cityCountLabel.textProperty().bind(viewModel.searchResultsProperty());
