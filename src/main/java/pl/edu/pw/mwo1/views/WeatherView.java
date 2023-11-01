@@ -6,9 +6,10 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import pl.edu.pw.mwo1.models.*;
+import pl.edu.pw.mwo1.services.WeatherService;
 import pl.edu.pw.mwo1.viewmodels.WeatherViewModel;
 
-public class WeatherController {
+public class WeatherView {
 
     @FXML
     private Label infoHeader;
@@ -32,8 +33,8 @@ public class WeatherController {
     private Button searchButton;
     private final WeatherViewModel viewModel;
 
-    public WeatherController(WeatherViewModel viewModel) {
-        this.viewModel = viewModel;
+    public WeatherView() {
+        this.viewModel = new WeatherViewModel(new WeatherService());
     }
 
     public void initialize() {

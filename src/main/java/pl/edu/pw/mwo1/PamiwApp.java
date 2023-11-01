@@ -1,19 +1,19 @@
 package pl.edu.pw.mwo1;
 
 import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import pl.edu.pw.mwo1.handlers.WeatherViewHandler;
 
 import java.io.IOException;
 
-public class WeatherReport extends Application {
+public class PamiwApp extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        WeatherViewHandler handler = new WeatherViewHandler();
-        Scene scene = handler.getWeatherScene();
+        var loader = new FXMLLoader(PamiwApp.class.getResource("main-view.fxml"));
+        var scene = new Scene(loader.load(),800,650);
 
-        stage.setTitle("Weather Report");
+        stage.setTitle("PamiwApp");
         stage.setResizable(false);
         stage.setScene(scene);
         stage.show();

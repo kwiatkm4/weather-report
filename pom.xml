@@ -90,7 +90,7 @@
                         <!-- Default configuration for running with: mvn clean javafx:run -->
                         <id>default-cli</id>
                         <configuration>
-                            <mainClass>pl.edu.pw.mwo1/pl.edu.pw.mwo1.WeatherReport</mainClass>
+                            <mainClass>pl.edu.pw.mwo1/pl.edu.pw.mwo1.PamiwApp</mainClass>
                             <launcher>app</launcher>
                             <jlinkZipName>app</jlinkZipName>
                             <jlinkImageName>app</jlinkImageName>
