@@ -8,6 +8,8 @@ module pl.edu.pw.mwo1 {
     requires com.fasterxml.jackson.annotation;
     requires com.fasterxml.jackson.databind;
     requires com.google.guice;
+    requires lombok;
+    requires java.sql;
 
     opens pl.edu.pw.mwo1 to javafx.fxml;
     exports pl.edu.pw.mwo1;
