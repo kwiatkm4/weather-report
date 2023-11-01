@@ -1,4 +1,4 @@
-package pl.edu.pw.mwo1;
+package pl.edu.pw.mwo1.services;
 
 import java.net.URI;
 import java.net.URLEncoder;

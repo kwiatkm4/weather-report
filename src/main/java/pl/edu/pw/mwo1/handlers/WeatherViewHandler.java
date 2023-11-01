@@ -1,9 +1,11 @@
-package pl.edu.pw.mwo1;
+package pl.edu.pw.mwo1.handlers;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import pl.edu.pw.mwo1.WeatherReport;
+import pl.edu.pw.mwo1.viewmodels.WeatherViewModel;
 
 import java.io.IOException;
 import java.lang.reflect.Constructor;

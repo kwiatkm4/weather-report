@@ -1,9 +1,10 @@
-package pl.edu.pw.mwo1;
+package pl.edu.pw.mwo1.viewmodels;
 
 import com.google.inject.Inject;
 import javafx.application.Platform;
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
+import pl.edu.pw.mwo1.services.WeatherService;
 import pl.edu.pw.mwo1.models.City;
 import pl.edu.pw.mwo1.models.CurrentConditions;
 import pl.edu.pw.mwo1.models.Index;
