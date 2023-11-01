@@ -18,6 +18,4 @@ module pl.edu.pw.mwo1 {
     opens pl.edu.pw.mwo1.views to javafx.fxml;
     exports pl.edu.pw.mwo1.services;
     opens pl.edu.pw.mwo1.services to javafx.fxml;
-    exports pl.edu.pw.mwo1.handlers;
-    opens pl.edu.pw.mwo1.handlers to javafx.fxml;
 }
