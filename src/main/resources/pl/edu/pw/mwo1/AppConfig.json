@@ -1,0 +1,14 @@
+{
+  "publisher": {
+    "multi": "/publishers",
+    "single": "/publishers/%d"
+  },
+  "author": {
+    "multi": "/authors",
+    "single": "/authors/%d"
+  },
+  "book": {
+    "multi": "/books",
+    "single": "/books/%d"
+  }
+}
