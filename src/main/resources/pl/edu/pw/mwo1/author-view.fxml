@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<VBox prefHeight="640" prefWidth="800" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.edu.pw.mwo1.views.AuthorView">
+    <Label alignment="CENTER" minHeight="80.0" prefHeight="80.0" prefWidth="800.0" text="Author Report" textAlignment="CENTER">
+        <font>
+          <Font name="System Bold" size="27.0" />
+        </font>
+        <padding>
+          <Insets bottom="20.0" top="20.0" />
+        </padding>
+    </Label>
+    <HBox maxHeight="150.0" prefHeight="150.0" prefWidth="800.0">
+        <VBox prefHeight="300.0" prefWidth="600.0">
+            <padding>
+                <Insets left="30.0" top="20.0" />
+            </padding>
+            <HBox prefHeight="100.0" prefWidth="200.0" spacing="40.0">
+                <HBox spacing="10.0">
+                    <Label prefWidth="50.0" text="ID">
+                        <HBox.margin>
+                            <Insets top="5.0" />
+                        </HBox.margin>
+                    </Label>
+                    <TextField fx:id="idField" promptText="enter author ID..." />
+                </HBox>
+                <HBox>
+                    <Label prefWidth="50.0" text="Name">
+                        <HBox.margin>
+                            <Insets top="5.0" />
+                        </HBox.margin>
+                    </Label>
+                    <TextField fx:id="nameField" promptText="enter author name..." />
+                </HBox>
+            </HBox>
+            <HBox prefHeight="100.0" prefWidth="200.0" spacing="40.0">
+                <HBox spacing="10.0">
+                    <Label prefWidth="50.0" text="Surname">
+                        <HBox.margin>
+                            <Insets top="5.0" />
+                        </HBox.margin>
+                    </Label>
+                    <TextField fx:id="surnameField" promptText="enter author surname..." />
+                </HBox>
+                <HBox>
+                    <Label prefWidth="50.0" text="Email">
+                        <HBox.margin>
+                            <Insets top="5.0" />
+                        </HBox.margin>
+                    </Label>
+                    <TextField fx:id="mailField" promptText="enter author email..." />
+                </HBox>
+            </HBox>
+        </VBox>
+        <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="200.0" spacing="15.0">
+            <Button mnemonicParsing="false" onAction="#getAction" prefWidth="100.0" text="Get all" />
+            <Button mnemonicParsing="false" onAction="#createAction" prefWidth="100.0" text="Create" />
+            <Button mnemonicParsing="false" onAction="#updateAction" prefWidth="100.0" text="Update" />
+            <Button mnemonicParsing="false" onAction="#deleteAction" prefWidth="100.0" text="Delete" />
+         <padding>
+            <Insets bottom="5.0" />
+         </padding>
+        </VBox>
+    </HBox>
+    <VBox prefHeight="410.0" prefWidth="200.0">
+        <TableView fx:id="table" fixedCellSize="30.0" focusTraversable="false" prefHeight="350.0" prefWidth="800.0">
+            <columns>
+                <TableColumn fx:id="idCol" editable="false" prefWidth="50.0" resizable="false" sortable="false" text="ID" />
+                <TableColumn fx:id="nameCol" editable="false" prefWidth="250.0" resizable="false" sortable="false" text="Name" />
+                <TableColumn fx:id="surnameCol" editable="false" prefWidth="250.0" resizable="false" sortable="false" text="Surname" />
+                <TableColumn fx:id="mailCol" editable="false" prefWidth="250.0" resizable="false" sortable="false" text="Email" />
+            </columns>
+         <columnResizePolicy>
+            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+         </columnResizePolicy>
+        </TableView>
+        <Pagination fx:id="pagination" prefHeight="50.0" prefWidth="800.0" />
+    </VBox>
+</VBox>

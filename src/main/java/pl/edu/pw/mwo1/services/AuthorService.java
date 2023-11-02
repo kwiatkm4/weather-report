@@ -48,8 +48,6 @@ public class AuthorService {
             var request = HttpRequest.newBuilder(new URI(uri)).GET().build();
             var response = client.send(request, HttpResponse.BodyHandlers.ofString());
 
-            if (response.body() == null) return null;
-
             return mapper.readValue(response.body(), new TypeReference<ServiceResponse<AuthorDto>>() {
             }).getData();
 
