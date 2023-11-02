@@ -36,7 +36,7 @@
                 </VBox>
                 <VBox spacing="5.0">
                     <Label prefWidth="70.0" text="Page count" />
-                    <TextField fx:id="pageField" prefWidth="150.0" promptText="enter page count..." />
+                    <TextField fx:id="countField" prefWidth="150.0" promptText="enter page count..." />
                 </VBox>
                 <VBox spacing="5.0">
                     <Label prefWidth="70.0" text="Date" />
@@ -46,7 +46,7 @@
             <HBox prefHeight="100.0" prefWidth="200.0" spacing="40.0">
                 <VBox spacing="5.0">
                     <Label prefWidth="70.0" text="Publisher ID" />
-                    <TextField fx:id="pubField" prefWidth="150.0" promptText="enter publisher ID..." />
+                    <TextField fx:id="publisherField" prefWidth="150.0" promptText="enter publisher ID..." />
                 </VBox>
                 <VBox spacing="5.0">
                     <Label prefWidth="70.0" text="ISBN" />
@@ -68,8 +68,8 @@
         <TableView fx:id="table" fixedCellSize="30.0" focusTraversable="false" prefHeight="350.0" prefWidth="800.0">
             <columns>
                 <TableColumn fx:id="idCol" editable="false" prefWidth="50.0" resizable="false" sortable="false" text="ID" />
-                <TableColumn fx:id="pubCol" editable="false" prefWidth="75.0" resizable="false" sortable="false" text="Author ID" />
-                <TableColumn fx:id="authCol" editable="false" prefWidth="75.0" resizable="false" sortable="false" text="PublisherID" />
+                <TableColumn fx:id="publisherCol" editable="false" prefWidth="75.0" resizable="false" sortable="false" text="Author ID" />
+                <TableColumn fx:id="authorCol" editable="false" prefWidth="75.0" resizable="false" sortable="false" text="PublisherID" />
                 <TableColumn fx:id="titleCol" editable="false" prefWidth="250.0" resizable="false" sortable="false" text="Title" />
                 <TableColumn fx:id="countCol" editable="false" prefWidth="100.0" resizable="false" sortable="false" text="Page count" />
                 <TableColumn fx:id="dateCol" editable="false" prefWidth="100.0" resizable="false" sortable="false" text="Release date" />

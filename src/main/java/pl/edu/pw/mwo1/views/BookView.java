@@ -17,9 +17,9 @@ public class BookView {
     @FXML
     private TableColumn<BookDto, Integer> idCol;
     @FXML
-    private TableColumn<BookDto, Integer> pubCol;
+    private TableColumn<BookDto, Integer> publisherCol;
     @FXML
-    private TableColumn<BookDto, Integer> authCol;
+    private TableColumn<BookDto, Integer> authorCol;
     @FXML
     private TableColumn<BookDto, String> titleCol;
     @FXML
@@ -31,15 +31,15 @@ public class BookView {
     @FXML
     private TextField idField;
     @FXML
-    private TextField titleField;
-    @FXML
     private TextField authorField;
     @FXML
-    private TextField pageField;
+    private TextField publisherField;
+    @FXML
+    private TextField titleField;
+    @FXML
+    private TextField countField;
     @FXML
     private DatePicker dateField;
-    @FXML
-    private TextField pubField;
     @FXML
     private TextField isbnField;
     private final BookViewModel viewModel;
@@ -57,8 +57,8 @@ public class BookView {
         });
         table.itemsProperty().bind(viewModel.getPubsOnPage());
         idCol.setCellValueFactory(new PropertyValueFactory<>("id"));
-        pubCol.setCellValueFactory(new PropertyValueFactory<>("publisherId"));
-        authCol.setCellValueFactory(new PropertyValueFactory<>("authorId"));
+        publisherCol.setCellValueFactory(new PropertyValueFactory<>("publisherId"));
+        authorCol.setCellValueFactory(new PropertyValueFactory<>("authorId"));
         titleCol.setCellValueFactory(new PropertyValueFactory<>("title"));
         countCol.setCellValueFactory(new PropertyValueFactory<>("pageCount"));
         dateCol.setCellValueFactory(new PropertyValueFactory<>("releaseDate"));
@@ -80,8 +80,8 @@ public class BookView {
                 idField.getText(),
                 titleField.getText(),
                 authorField.getText(),
-                pubField.getText(),
-                pageField.getText(),
+                publisherField.getText(),
+                countField.getText(),
                 new Date(date.getYear(), date.getMonthValue(), date.getDayOfMonth()),
                 isbnField.getText())));
 
@@ -95,8 +95,8 @@ public class BookView {
         Thread t = new Thread(() -> Platform.runLater(() -> viewModel.create(
                 titleField.getText(),
                 authorField.getText(),
-                pubField.getText(),
-                pageField.getText(),
+                publisherField.getText(),
+                countField.getText(),
                 new Date(date.getYear(), date.getMonthValue(), date.getDayOfMonth()),
                 isbnField.getText()
         )));
