@@ -34,7 +34,7 @@ public class AuthorView {
     private final AuthorViewModel viewModel;
 
     public AuthorView() {
-        viewModel = new AuthorViewModel();
+        this.viewModel = new AuthorViewModel();
     }
 
     public void initialize() {

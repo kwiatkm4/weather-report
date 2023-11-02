@@ -4,6 +4,7 @@ import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import net.synedra.validatorfx.Validator;
 import pl.edu.pw.mwo1.models.PublisherDto;
 import pl.edu.pw.mwo1.viewmodels.PublisherViewModel;
 
@@ -23,7 +24,7 @@ public class PublisherView {
     private final PublisherViewModel viewModel;
 
     public PublisherView() {
-        viewModel = new PublisherViewModel();
+        this.viewModel = new PublisherViewModel();
     }
 
     public void initialize() {

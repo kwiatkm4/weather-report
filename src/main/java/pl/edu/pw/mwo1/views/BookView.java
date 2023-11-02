@@ -45,7 +45,7 @@ public class BookView {
     private final BookViewModel viewModel;
 
     public BookView() {
-        viewModel = new BookViewModel();
+        this.viewModel = new BookViewModel();
     }
 
     public void initialize() {
