@@ -5,45 +5,54 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<VBox prefHeight="640" prefWidth="800" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="pl.edu.pw.mwo1.views.PublisherView">
-    <Label alignment="CENTER" prefHeight="80.0" prefWidth="800.0" text="Publisher Report" textAlignment="CENTER">
+<VBox prefHeight="640" prefWidth="800" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.edu.pw.mwo1.views.PublisherView">
+    <Label alignment="CENTER" minHeight="80.0" prefHeight="80.0" prefWidth="800.0" text="Publisher Report" textAlignment="CENTER">
         <font>
-          <Font name="System Bold" size="27.0"/>
+          <Font name="System Bold" size="27.0" />
         </font>
         <padding>
-          <Insets bottom="20.0" top="20.0"/>
+          <Insets bottom="20.0" top="20.0" />
         </padding>
     </Label>
-    <HBox prefHeight="150.0" prefWidth="800.0">
+    <HBox maxHeight="150.0" prefHeight="150.0" prefWidth="800.0">
         <VBox prefHeight="300.0" prefWidth="400.0">
             <padding>
-                <Insets left="30.0" top="20.0"/>
+                <Insets left="30.0" top="20.0" />
             </padding>
             <HBox prefHeight="100.0" prefWidth="200.0" spacing="10.0">
                 <Label prefWidth="40.0" text="ID">
                     <HBox.margin>
-                        <Insets top="5.0"/>
+                        <Insets top="5.0" />
                     </HBox.margin>
                 </Label>
-                <TextField fx:id="idField" promptText="enter publisher ID..."/>
+                <TextField fx:id="idField" promptText="enter publisher ID..." />
             </HBox>
             <HBox prefHeight="100.0" prefWidth="200.0" spacing="10.0">
                 <Label prefWidth="40.0" text="Name">
                     <HBox.margin>
-                        <Insets top="5.0"/>
+                        <Insets top="5.0" />
                     </HBox.margin>
                 </Label>
-                <TextField fx:id="nameField" promptText="enter publisher name..."/>
+                <TextField fx:id="nameField" promptText="enter publisher name..." />
             </HBox>
         </VBox>
         <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="400.0" spacing="15.0">
-            <Button fx:id="getButton" onAction="#getAction" mnemonicParsing="false" prefWidth="100.0" text="Get all"/>
-            <Button fx:id="createButton" onAction="#createAction" mnemonicParsing="false" prefWidth="100.0" text="Create"/>
-            <Button fx:id="updateButton" onAction="#updateAction" mnemonicParsing="false" prefWidth="100.0" text="Update"/>
-            <Button fx:id="deleteButton" onAction="#deleteAction" mnemonicParsing="false" prefWidth="100.0" text="Delete"/>
+            <Button fx:id="getButton" mnemonicParsing="false" onAction="#getAction" prefWidth="100.0" text="Get all" />
+            <Button fx:id="createButton" mnemonicParsing="false" onAction="#createAction" prefWidth="100.0" text="Create" />
+            <Button fx:id="updateButton" mnemonicParsing="false" onAction="#updateAction" prefWidth="100.0" text="Update" />
+            <Button fx:id="deleteButton" mnemonicParsing="false" onAction="#deleteAction" prefWidth="100.0" text="Delete" />
+         <padding>
+            <Insets bottom="5.0" />
+         </padding>
         </VBox>
     </HBox>
-    <AnchorPane fx:id="contentPanel" prefHeight="380.0" prefWidth="200.0"/>
-    <Label fx:id="statusLabel" prefHeight="30.0" prefWidth="800.0" text="Status bar"/>
+    <VBox prefHeight="410.0" prefWidth="200.0">
+        <TableView fx:id="table" prefHeight="350.0" prefWidth="800.0">
+            <columns>
+                <TableColumn fx:id="idCol" editable="false" prefWidth="120.0" resizable="false" sortable="false" text="ID" />
+                <TableColumn fx:id="nameCol" editable="false" prefWidth="680.0" resizable="false" sortable="false" text="Name" />
+            </columns>
+        </TableView>
+        <Pagination fx:id="pagination" prefHeight="50.0" prefWidth="800.0" />
+    </VBox>
 </VBox>

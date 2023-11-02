@@ -1,14 +1,21 @@
 package pl.edu.pw.mwo1.views;
 
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
+import javafx.scene.control.*;
+import pl.edu.pw.mwo1.models.PublisherDto;
 import pl.edu.pw.mwo1.viewmodels.PublisherViewModel;
 
 public class PublisherView {
+    @FXML
+    public Pagination pagination;
+    @FXML
+    public TableView<PublisherDto> table;
+    @FXML
+    public TableColumn<PublisherDto, Integer> idCol;
+    @FXML
+    public TableColumn<PublisherDto, String> nameCol;
     @FXML
     private Button getButton;
     @FXML
@@ -22,8 +29,6 @@ public class PublisherView {
     @FXML
     private TextField idField;
     @FXML
-    private AnchorPane contentPanel;
-    @FXML
     private Label statusLabel;
     private final PublisherViewModel viewModel;
 
@@ -33,21 +38,32 @@ public class PublisherView {
 
 
     public void initialize() {
-        contentPanel.getChildren().add
+        pagination.pageCountProperty().bind(viewModel.getPageQuantProperty());
+        pagination.currentPageIndexProperty().addListener(observable -> {
+            viewModel.changePage(pagination.getCurrentPageIndex());
+        });
+        table.itemsProperty().bind(viewModel.getPubsOnPage());
     }
 
     @FXML
-    public void getAction(ActionEvent actionEvent) {
-        viewModel.get();
+    public void getAction() {
+        Thread t = new Thread(()-> {
+            Platform.runLater(()-> {
+                viewModel.get();
+                pagination.currentPageIndexProperty().setValue(0);
+            });
+        });
+
+        t.start();
     }
 
     @FXML
-    public void createAction(ActionEvent actionEvent) {
-        viewModel.update(nameField.getText());
+    public void createAction() {
+        viewModel.create(nameField.getText());
     }
 
     @FXML
-    public void updateAction(ActionEvent actionEvent) {
+    public void updateAction() {
         viewModel.update(idField.getText(), nameField.getText());
     }
 
