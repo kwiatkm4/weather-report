@@ -9,17 +9,17 @@ import pl.edu.pw.mwo1.viewmodels.PublisherViewModel;
 
 public class PublisherView {
     @FXML
-    public Pagination pagination;
+    private Pagination pagination;
     @FXML
-    public TableView<PublisherDto> table;
+    private TableView<PublisherDto> table;
     @FXML
-    public TableColumn<PublisherDto, Integer> idCol;
+    private TableColumn<PublisherDto, Integer> idCol;
     @FXML
-    public TableColumn<PublisherDto, String> nameCol;
-    @FXML
-    private TextField nameField;
+    private TableColumn<PublisherDto, String> nameCol;
     @FXML
     private TextField idField;
+    @FXML
+    private TextField nameField;
     private final PublisherViewModel viewModel;
 
     public PublisherView() {
@@ -40,11 +40,9 @@ public class PublisherView {
 
     @FXML
     public void getAction() {
-        Thread t = new Thread(() -> Platform.runLater(() -> {
-            pagination.currentPageIndexProperty().setValue(0);
-            viewModel.get();
-        }));
+        Thread t = new Thread(() -> Platform.runLater(viewModel::get));
 
+        pagination.currentPageIndexProperty().setValue(0);
         t.start();
     }
 
@@ -52,6 +50,7 @@ public class PublisherView {
     public void createAction() {
         Thread t = new Thread(() -> Platform.runLater(() -> viewModel.create(nameField.getText())));
 
+        pagination.currentPageIndexProperty().setValue(0);
         t.start();
     }
 
@@ -59,6 +58,7 @@ public class PublisherView {
     public void updateAction() {
         Thread t = new Thread(() -> Platform.runLater(() -> viewModel.update(idField.getText(), nameField.getText())));
 
+        pagination.currentPageIndexProperty().setValue(0);
         t.start();
     }
 
@@ -66,6 +66,7 @@ public class PublisherView {
     public void deleteAction() {
         Thread t = new Thread(() -> Platform.runLater(() -> viewModel.delete(idField.getText())));
 
+        pagination.currentPageIndexProperty().setValue(0);
         t.start();
     }
 }

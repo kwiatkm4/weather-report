@@ -67,26 +67,9 @@ public class BookView {
 
     @FXML
     public void getAction() {
-        Thread t = new Thread(() -> Platform.runLater(() -> {
-            pagination.currentPageIndexProperty().setValue(0);
-            viewModel.get();
-        }));
+        Thread t = new Thread(() -> Platform.runLater(viewModel::get));
 
-        t.start();
-    }
-
-    @FXML
-    public void createAction() {
-        var date = dateField.getValue();
-        Thread t = new Thread(() -> Platform.runLater(() -> viewModel.create(
-                titleField.getText(),
-                authorField.getText(),
-                pubField.getText(),
-                pageField.getText(),
-                new Date(date.getYear(), date.getMonthValue(), date.getDayOfMonth()),
-                isbnField.getText()
-        )));
-
+        pagination.currentPageIndexProperty().setValue(0);
         t.start();
     }
 
@@ -102,6 +85,23 @@ public class BookView {
                 new Date(date.getYear(), date.getMonthValue(), date.getDayOfMonth()),
                 isbnField.getText())));
 
+        pagination.currentPageIndexProperty().setValue(0);
+        t.start();
+    }
+
+    @FXML
+    public void createAction() {
+        var date = dateField.getValue();
+        Thread t = new Thread(() -> Platform.runLater(() -> viewModel.create(
+                titleField.getText(),
+                authorField.getText(),
+                pubField.getText(),
+                pageField.getText(),
+                new Date(date.getYear(), date.getMonthValue(), date.getDayOfMonth()),
+                isbnField.getText()
+        )));
+
+        pagination.currentPageIndexProperty().setValue(0);
         t.start();
     }
 
@@ -109,6 +109,7 @@ public class BookView {
     public void deleteAction() {
         Thread t = new Thread(() -> Platform.runLater(() -> viewModel.delete(idField.getText())));
 
+        pagination.currentPageIndexProperty().setValue(0);
         t.start();
     }
 }

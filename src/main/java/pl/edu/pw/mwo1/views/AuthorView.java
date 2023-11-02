@@ -12,25 +12,25 @@ import pl.edu.pw.mwo1.viewmodels.AuthorViewModel;
 
 public class AuthorView {
     @FXML
-    public Pagination pagination;
+    private Pagination pagination;
     @FXML
-    public TableView<AuthorDto> table;
+    private TableView<AuthorDto> table;
     @FXML
-    public TableColumn<AuthorDto, Integer> idCol;
+    private TableColumn<AuthorDto, Integer> idCol;
     @FXML
-    public TableColumn<AuthorDto, String> nameCol;
+    private TableColumn<AuthorDto, String> nameCol;
     @FXML
-    public TextField surnameField;
+    private TableColumn<AuthorDto, String> surnameCol;
     @FXML
-    public TextField mailField;
+    private TableColumn<AuthorDto, String> mailCol;
     @FXML
-    public TableColumn<AuthorDto, String> surnameCol;
-    @FXML
-    public TableColumn<AuthorDto, String> mailCol;
+    private TextField idField;
     @FXML
     private TextField nameField;
     @FXML
-    private TextField idField;
+    private TextField surnameField;
+    @FXML
+    private TextField mailField;
     private final AuthorViewModel viewModel;
 
     public AuthorView() {
@@ -53,11 +53,9 @@ public class AuthorView {
 
     @FXML
     public void getAction() {
-        Thread t = new Thread(() -> Platform.runLater(() -> {
-            pagination.currentPageIndexProperty().setValue(0);
-            viewModel.get();
-        }));
+        Thread t = new Thread(() -> Platform.runLater(viewModel::get));
 
+        pagination.currentPageIndexProperty().setValue(0);
         t.start();
     }
 
@@ -65,6 +63,7 @@ public class AuthorView {
     public void createAction() {
         Thread t = new Thread(() -> Platform.runLater(() -> viewModel.create(nameField.getText(), surnameField.getText(), mailField.getText())));
 
+        pagination.currentPageIndexProperty().setValue(0);
         t.start();
     }
 
@@ -72,6 +71,7 @@ public class AuthorView {
     public void updateAction() {
         Thread t = new Thread(() -> Platform.runLater(() -> viewModel.update(idField.getText(), nameField.getText(), surnameField.getText(), mailField.getText())));
 
+        pagination.currentPageIndexProperty().setValue(0);
         t.start();
     }
 
@@ -79,6 +79,7 @@ public class AuthorView {
     public void deleteAction() {
         Thread t = new Thread(() -> Platform.runLater(() -> viewModel.delete(idField.getText())));
 
+        pagination.currentPageIndexProperty().setValue(0);
         t.start();
     }
 }
