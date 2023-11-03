@@ -4,7 +4,6 @@ import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import net.synedra.validatorfx.Validator;
 import pl.edu.pw.mwo1.models.PublisherDto;
 import pl.edu.pw.mwo1.viewmodels.PublisherViewModel;
 
@@ -34,7 +33,7 @@ public class PublisherView {
 
             t.start();
         });
-        table.itemsProperty().bind(viewModel.getPubsOnPage());
+        table.itemsProperty().bind(viewModel.getPublishersOnPage());
         idCol.setCellValueFactory(new PropertyValueFactory<>("id"));
         nameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
     }

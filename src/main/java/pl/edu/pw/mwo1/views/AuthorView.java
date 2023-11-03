@@ -44,7 +44,7 @@ public class AuthorView {
 
             t.start();
         });
-        table.itemsProperty().bind(viewModel.getPubsOnPage());
+        table.itemsProperty().bind(viewModel.getAuthorsOnPage());
         idCol.setCellValueFactory(new PropertyValueFactory<>("id"));
         nameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
         surnameCol.setCellValueFactory(new PropertyValueFactory<>("surname"));

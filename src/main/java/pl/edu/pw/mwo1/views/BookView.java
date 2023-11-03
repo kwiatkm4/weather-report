@@ -55,7 +55,7 @@ public class BookView {
 
             t.start();
         });
-        table.itemsProperty().bind(viewModel.getPubsOnPage());
+        table.itemsProperty().bind(viewModel.getBooksOnPage());
         idCol.setCellValueFactory(new PropertyValueFactory<>("id"));
         publisherCol.setCellValueFactory(new PropertyValueFactory<>("publisherId"));
         authorCol.setCellValueFactory(new PropertyValueFactory<>("authorId"));

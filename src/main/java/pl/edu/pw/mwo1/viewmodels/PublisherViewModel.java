@@ -17,22 +17,22 @@ public class PublisherViewModel {
     private final PublisherService service;
     @Getter
     private final IntegerProperty pageQuantProperty;
-    private List<PublisherDto> allPubs;
+    private List<PublisherDto> publishers;
     @Getter
-    private final ListProperty<PublisherDto> pubsOnPage;
+    private final ListProperty<PublisherDto> publishersOnPage;
 
     public PublisherViewModel() {
         this.service = new PublisherService();
-        this.pubsOnPage = new SimpleListProperty<>(FXCollections.observableList(new ArrayList<>()));
+        this.publishersOnPage = new SimpleListProperty<>(FXCollections.observableList(new ArrayList<>()));
         this.pageQuantProperty = new SimpleIntegerProperty(1);
-        this.allPubs = new ArrayList<>();
+        this.publishers = new ArrayList<>();
     }
 
     public void get() {
         var data = service.getAll();
 
         if (data != null && !data.isEmpty()) {
-            allPubs = data;
+            publishers = data;
             int pageCount = data.size() / DATA_PER_PAGE;
             if (data.size() % DATA_PER_PAGE != 0) pageCount++;
 
@@ -40,22 +40,18 @@ public class PublisherViewModel {
 
             changePage(0);
         } else {
-            allPubs.clear();
-            pubsOnPage.clear();
+            publishers.clear();
+            publishersOnPage.clear();
             pageQuantProperty.setValue(1);
         }
     }
 
     public void create(String name) {
-        if (name == null || name.length() < 2 || name.length() > 50) return;
-
         service.create(PublisherDto.builder().name(name).build());
         get();
     }
 
     public void update(String id, String name) {
-        if (name == null || name.length() < 2 || name.length() > 50) return;
-
         int dataId;
         try {
             dataId = Integer.parseInt(id);
@@ -82,10 +78,13 @@ public class PublisherViewModel {
     }
 
     public void changePage(int currentPageIndex) {
-        pubsOnPage.clear();
+        var pageData = new ArrayList<PublisherDto>();
 
-        for (int i = currentPageIndex * DATA_PER_PAGE; i < Math.min(allPubs.size(), (currentPageIndex + 1) * DATA_PER_PAGE); i++) {
-            pubsOnPage.add(allPubs.get(i));
+        for (int i = currentPageIndex * DATA_PER_PAGE; i < Math.min(publishers.size(), (currentPageIndex + 1) * DATA_PER_PAGE); i++) {
+            pageData.add(publishers.get(i));
         }
+
+        publishersOnPage.clear();
+        publishersOnPage.addAll(pageData);
     }
 }

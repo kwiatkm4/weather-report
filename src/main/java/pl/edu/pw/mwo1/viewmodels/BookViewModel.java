@@ -18,22 +18,22 @@ public class BookViewModel {
     private final BookService service;
     @Getter
     private final IntegerProperty pageQuantProperty;
-    private List<BookDto> allPubs;
+    private List<BookDto> books;
     @Getter
-    private final ListProperty<BookDto> pubsOnPage;
+    private final ListProperty<BookDto> booksOnPage;
 
     public BookViewModel() {
         this.service = new BookService();
-        this.pubsOnPage = new SimpleListProperty<>(FXCollections.observableList(new ArrayList<>()));
+        this.booksOnPage = new SimpleListProperty<>(FXCollections.observableList(new ArrayList<>()));
         this.pageQuantProperty = new SimpleIntegerProperty(1);
-        this.allPubs = new ArrayList<>();
+        this.books = new ArrayList<>();
     }
 
     public void get() {
         var data = service.getAll();
 
         if (data != null && !data.isEmpty()) {
-            allPubs = data;
+            books = data;
             int pageCount = data.size() / DATA_PER_PAGE;
             if (data.size() % DATA_PER_PAGE != 0) pageCount++;
 
@@ -41,8 +41,8 @@ public class BookViewModel {
 
             changePage(0);
         } else {
-            allPubs.clear();
-            pubsOnPage.clear();
+            books.clear();
+            booksOnPage.clear();
             pageQuantProperty.setValue(1);
         }
     }
@@ -86,10 +86,13 @@ public class BookViewModel {
     }
 
     public void changePage(int currentPageIndex) {
-        pubsOnPage.clear();
+        var pageData = new ArrayList<BookDto>();
 
-        for (int i = currentPageIndex * DATA_PER_PAGE; i < Math.min(allPubs.size(), (currentPageIndex + 1) * DATA_PER_PAGE); i++) {
-            pubsOnPage.add(allPubs.get(i));
+        for (int i = currentPageIndex * DATA_PER_PAGE; i < Math.min(books.size(), (currentPageIndex + 1) * DATA_PER_PAGE); i++) {
+            pageData.add(books.get(i));
         }
+
+        booksOnPage.clear();
+        booksOnPage.addAll(pageData);
     }
 }
