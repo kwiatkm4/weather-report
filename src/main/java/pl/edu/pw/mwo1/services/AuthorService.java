@@ -42,21 +42,6 @@ public class AuthorService {
         }
     }
 
-    public synchronized AuthorDto get(int id) {
-        try {
-            var uri = BASE_URL + String.format(endpoints.getAuthor().getSingle(), id);
-            var request = HttpRequest.newBuilder(new URI(uri)).GET().build();
-            var response = client.send(request, HttpResponse.BodyHandlers.ofString());
-
-            return mapper.readValue(response.body(), new TypeReference<ServiceResponse<AuthorDto>>() {
-            }).getData();
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
-
     public synchronized void create(AuthorDto dto) {
         try {
             var uri = BASE_URL + endpoints.getAuthor().getMulti();
