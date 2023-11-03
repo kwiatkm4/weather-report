@@ -37,7 +37,6 @@ public class AuthorService {
             }).getData();
 
         } catch (Exception e) {
-            e.printStackTrace();
             return null;
         }
     }
@@ -51,9 +50,21 @@ public class AuthorService {
                     .POST(HttpRequest.BodyPublishers.ofString(data))
                     .build();
 
-            client.send(request, HttpResponse.BodyHandlers.ofString());
+            var response = client.send(request, HttpResponse.BodyHandlers.ofString());
+
+            if (response.body() != null) {
+                var serviceResponse = mapper.readValue(response.body(), new TypeReference<ServiceResponse<AuthorDto>>() {
+                });
+
+                if (!serviceResponse.isWasSuccessful()) {
+                    throw new Exception(serviceResponse.getMessage());
+                }
+            }
         } catch (Exception e) {
-            e.printStackTrace();
+            System.out.println("ERROR: Failed to create author.");
+
+            if (e.getMessage() != null)
+                System.out.println("Message: " + e.getMessage());
         }
     }
 
@@ -66,9 +77,21 @@ public class AuthorService {
                     .PUT(HttpRequest.BodyPublishers.ofString(data))
                     .build();
 
-            client.send(request, HttpResponse.BodyHandlers.ofString());
+            var response = client.send(request, HttpResponse.BodyHandlers.ofString());
+
+            if (response.body() != null) {
+                var serviceResponse = mapper.readValue(response.body(), new TypeReference<ServiceResponse<AuthorDto>>() {
+                });
+
+                if (!serviceResponse.isWasSuccessful()) {
+                    throw new Exception(serviceResponse.getMessage());
+                }
+            }
         } catch (Exception e) {
-            e.printStackTrace();
+            System.out.println("ERROR: Failed to update author.");
+
+            if (e.getMessage() != null)
+                System.out.println("Message: " + e.getMessage());
         }
     }
 
@@ -81,7 +104,10 @@ public class AuthorService {
 
             client.send(request, HttpResponse.BodyHandlers.ofString());
         } catch (Exception e) {
-            e.printStackTrace();
+            System.out.println("ERROR: Failed to delete author.");
+
+            if (e.getMessage() != null)
+                System.out.println("Message: " + e.getMessage());
         }
     }
 }

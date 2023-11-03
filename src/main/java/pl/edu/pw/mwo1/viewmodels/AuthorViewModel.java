@@ -56,7 +56,7 @@ public class AuthorViewModel {
         try {
             dataId = Integer.parseInt(id);
         } catch (Exception e) {
-            System.out.println("Wrong data in ID field.");
+            System.out.println("ERROR: Wrong data in ID field.");
             return;
         }
 
@@ -69,7 +69,7 @@ public class AuthorViewModel {
         try {
             dataId = Integer.parseInt(id);
         } catch (Exception e) {
-            System.out.println("Wrong data in ID field.");
+            System.out.println("ERROR: Wrong data in ID field.");
             return;
         }
 
