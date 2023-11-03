@@ -2,7 +2,6 @@ package pl.edu.pw.mwo1.services;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import pl.edu.pw.mwo1.models.AuthorDto;
 import pl.edu.pw.mwo1.models.BookDto;
 import pl.edu.pw.mwo1.models.Endpoints;
 import pl.edu.pw.mwo1.models.ServiceResponse;
@@ -54,7 +53,7 @@ public class BookService {
             var response = client.send(request, HttpResponse.BodyHandlers.ofString());
 
             if (response.body() != null) {
-                var serviceResponse = mapper.readValue(response.body(), new TypeReference<ServiceResponse<AuthorDto>>() {
+                var serviceResponse = mapper.readValue(response.body(), new TypeReference<ServiceResponse<BookDto>>() {
                 });
 
                 if (!serviceResponse.isWasSuccessful()) {
@@ -81,7 +80,7 @@ public class BookService {
             var response = client.send(request, HttpResponse.BodyHandlers.ofString());
 
             if (response.body() != null) {
-                var serviceResponse = mapper.readValue(response.body(), new TypeReference<ServiceResponse<AuthorDto>>() {
+                var serviceResponse = mapper.readValue(response.body(), new TypeReference<ServiceResponse<BookDto>>() {
                 });
 
                 if (!serviceResponse.isWasSuccessful()) {

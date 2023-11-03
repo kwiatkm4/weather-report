@@ -6,7 +6,7 @@
 <?import javafx.scene.text.*?>
 
 <VBox prefHeight="640" prefWidth="800" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.edu.pw.mwo1.views.BookView">
-    <Label alignment="CENTER" minHeight="80.0" prefHeight="80.0" prefWidth="800.0" text="Author Report" textAlignment="CENTER">
+    <Label alignment="CENTER" minHeight="80.0" prefHeight="80.0" prefWidth="800.0" text="Book Report" textAlignment="CENTER">
         <font>
           <Font name="System Bold" size="27.0" />
         </font>
