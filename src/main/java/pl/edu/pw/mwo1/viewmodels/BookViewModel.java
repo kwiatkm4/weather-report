@@ -48,11 +48,21 @@ public class BookViewModel {
     }
 
     public void create(String title, String author, String publisher, String page, Date date, String isbn) {
+        int authorId, publisherId, pageCount;
+        try {
+            authorId = Integer.parseInt(author);
+            publisherId = Integer.parseInt(publisher);
+            pageCount = Integer.parseInt(page);
+        } catch (Exception e) {
+            System.out.println("ERROR: Wrong data in ID field.");
+            return;
+        }
+
         service.create(BookDto.builder()
                 .title(title)
-                .authorId(Integer.parseInt(author))
-                .publisherId(Integer.parseInt(publisher))
-                .pageCount(Integer.parseInt(page))
+                .authorId(authorId)
+                .publisherId(publisherId)
+                .pageCount(pageCount)
                 .releaseDate(date)
                 .isbn(isbn)
                 .build());
@@ -60,12 +70,23 @@ public class BookViewModel {
     }
 
     public void update(String id, String title, String author, String publisher, String page, Date date, String isbn) {
-        service.update(Integer.parseInt(id),
+        int bookId, authorId, publisherId, pageCount;
+        try {
+            bookId = Integer.parseInt(id);
+            authorId = Integer.parseInt(author);
+            publisherId = Integer.parseInt(publisher);
+            pageCount = Integer.parseInt(page);
+        } catch (Exception e) {
+            System.out.println("ERROR: Wrong data in ID field.");
+            return;
+        }
+
+        service.update(bookId,
                 BookDto.builder()
                         .title(title)
-                        .authorId(Integer.parseInt(author))
-                        .publisherId(Integer.parseInt(publisher))
-                        .pageCount(Integer.parseInt(page))
+                        .authorId(authorId)
+                        .publisherId(publisherId)
+                        .pageCount(pageCount)
                         .releaseDate(date)
                         .isbn(isbn)
                         .build());
@@ -77,7 +98,7 @@ public class BookViewModel {
         try {
             dataId = Integer.parseInt(id);
         } catch (Exception e) {
-            System.out.println("Wrong data in ID field.");
+            System.out.println("ERROR: Wrong data in ID field.");
             return;
         }
 

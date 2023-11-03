@@ -2,6 +2,7 @@ package pl.edu.pw.mwo1.services;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import pl.edu.pw.mwo1.models.AuthorDto;
 import pl.edu.pw.mwo1.models.BookDto;
 import pl.edu.pw.mwo1.models.Endpoints;
 import pl.edu.pw.mwo1.models.ServiceResponse;
@@ -37,7 +38,6 @@ public class BookService {
             }).getData();
 
         } catch (Exception e) {
-            e.printStackTrace();
             return null;
         }
     }
@@ -51,9 +51,21 @@ public class BookService {
                     .POST(HttpRequest.BodyPublishers.ofString(data))
                     .build();
 
-            client.send(request, HttpResponse.BodyHandlers.ofString());
+            var response = client.send(request, HttpResponse.BodyHandlers.ofString());
+
+            if (response.body() != null) {
+                var serviceResponse = mapper.readValue(response.body(), new TypeReference<ServiceResponse<AuthorDto>>() {
+                });
+
+                if (!serviceResponse.isWasSuccessful()) {
+                    throw new Exception(serviceResponse.getMessage());
+                }
+            }
         } catch (Exception e) {
-            e.printStackTrace();
+            System.out.println("ERROR: Failed to create book.");
+
+            if (e.getMessage() != null)
+                System.out.println("Message: " + e.getMessage());
         }
     }
 
@@ -66,9 +78,21 @@ public class BookService {
                     .PUT(HttpRequest.BodyPublishers.ofString(data))
                     .build();
 
-            client.send(request, HttpResponse.BodyHandlers.ofString());
+            var response = client.send(request, HttpResponse.BodyHandlers.ofString());
+
+            if (response.body() != null) {
+                var serviceResponse = mapper.readValue(response.body(), new TypeReference<ServiceResponse<AuthorDto>>() {
+                });
+
+                if (!serviceResponse.isWasSuccessful()) {
+                    throw new Exception(serviceResponse.getMessage());
+                }
+            }
         } catch (Exception e) {
-            e.printStackTrace();
+            System.out.println("ERROR: Failed to update book.");
+
+            if (e.getMessage() != null)
+                System.out.println("Message: " + e.getMessage());
         }
     }
 
@@ -81,7 +105,10 @@ public class BookService {
 
             client.send(request, HttpResponse.BodyHandlers.ofString());
         } catch (Exception e) {
-            e.printStackTrace();
+            System.out.println("ERROR: Failed to delete book.");
+
+            if (e.getMessage() != null)
+                System.out.println("Message: " + e.getMessage());
         }
     }
 }
