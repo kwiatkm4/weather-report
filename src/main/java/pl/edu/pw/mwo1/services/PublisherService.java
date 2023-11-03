@@ -37,7 +37,6 @@ public class PublisherService {
             }).getData();
 
         } catch (Exception e) {
-            e.printStackTrace();
             return null;
         }
     }
@@ -51,9 +50,21 @@ public class PublisherService {
                     .POST(HttpRequest.BodyPublishers.ofString(data))
                     .build();
 
-            client.send(request, HttpResponse.BodyHandlers.ofString());
+            var response = client.send(request, HttpResponse.BodyHandlers.ofString());
+
+            if (response.body() != null) {
+                var serviceResponse = mapper.readValue(response.body(), new TypeReference<ServiceResponse<PublisherDto>>() {
+                });
+
+                if (!serviceResponse.isWasSuccessful()) {
+                    throw new Exception(serviceResponse.getMessage());
+                }
+            }
         } catch (Exception e) {
-            e.printStackTrace();
+            System.out.println("ERROR: Failed to create publisher.");
+
+            if (e.getMessage() != null)
+                System.out.println("Message: " + e.getMessage());
         }
     }
 
@@ -66,9 +77,21 @@ public class PublisherService {
                     .PUT(HttpRequest.BodyPublishers.ofString(data))
                     .build();
 
-            client.send(request, HttpResponse.BodyHandlers.ofString());
+            var response = client.send(request, HttpResponse.BodyHandlers.ofString());
+
+            if (response.body() != null) {
+                var serviceResponse = mapper.readValue(response.body(), new TypeReference<ServiceResponse<PublisherDto>>() {
+                });
+
+                if (!serviceResponse.isWasSuccessful()) {
+                    throw new Exception(serviceResponse.getMessage());
+                }
+            }
         } catch (Exception e) {
-            e.printStackTrace();
+            System.out.println("ERROR: Failed to update publisher.");
+
+            if (e.getMessage() != null)
+                System.out.println("Message: " + e.getMessage());
         }
     }
 
@@ -81,7 +104,10 @@ public class PublisherService {
 
             client.send(request, HttpResponse.BodyHandlers.ofString());
         } catch (Exception e) {
-            e.printStackTrace();
+            System.out.println("ERROR: Failed to delete publisher.");
+
+            if (e.getMessage() != null)
+                System.out.println("Message: " + e.getMessage());
         }
     }
 }
