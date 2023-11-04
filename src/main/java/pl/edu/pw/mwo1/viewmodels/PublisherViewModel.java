@@ -7,14 +7,15 @@ import javafx.beans.property.SimpleListProperty;
 import javafx.collections.FXCollections;
 import lombok.Getter;
 import pl.edu.pw.mwo1.models.PublisherDto;
-import pl.edu.pw.mwo1.services.PublisherService;
+import pl.edu.pw.mwo1.services.APIService;
+import pl.edu.pw.mwo1.utils.ConfigHandler;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class PublisherViewModel {
     private final static int DATA_PER_PAGE = 10;
-    private final PublisherService service;
+    private final APIService<PublisherDto> service;
     @Getter
     private final IntegerProperty pageQuantProperty;
     private List<PublisherDto> publishers;
@@ -22,7 +23,7 @@ public class PublisherViewModel {
     private final ListProperty<PublisherDto> publishersOnPage;
 
     public PublisherViewModel() {
-        this.service = new PublisherService();
+        this.service = new APIService<>(ConfigHandler.getConfig().getPublisher());
         this.publishersOnPage = new SimpleListProperty<>(FXCollections.observableList(new ArrayList<>()));
         this.pageQuantProperty = new SimpleIntegerProperty(1);
         this.publishers = new ArrayList<>();

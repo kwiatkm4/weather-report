@@ -7,7 +7,8 @@ import javafx.beans.property.SimpleListProperty;
 import javafx.collections.FXCollections;
 import lombok.Getter;
 import pl.edu.pw.mwo1.models.BookDto;
-import pl.edu.pw.mwo1.services.BookService;
+import pl.edu.pw.mwo1.services.APIService;
+import pl.edu.pw.mwo1.utils.ConfigHandler;
 
 import java.sql.Date;
 import java.util.ArrayList;
@@ -15,7 +16,7 @@ import java.util.List;
 
 public class BookViewModel {
     private final static int DATA_PER_PAGE = 9;
-    private final BookService service;
+    private final APIService<BookDto> service;
     @Getter
     private final IntegerProperty pageQuantProperty;
     private List<BookDto> books;
@@ -23,7 +24,7 @@ public class BookViewModel {
     private final ListProperty<BookDto> booksOnPage;
 
     public BookViewModel() {
-        this.service = new BookService();
+        this.service = new APIService<>(ConfigHandler.getConfig().getBook());
         this.booksOnPage = new SimpleListProperty<>(FXCollections.observableList(new ArrayList<>()));
         this.pageQuantProperty = new SimpleIntegerProperty(1);
         this.books = new ArrayList<>();

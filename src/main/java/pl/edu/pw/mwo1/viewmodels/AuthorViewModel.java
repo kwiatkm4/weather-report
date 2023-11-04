@@ -7,14 +7,15 @@ import javafx.beans.property.SimpleListProperty;
 import javafx.collections.FXCollections;
 import lombok.Getter;
 import pl.edu.pw.mwo1.models.AuthorDto;
-import pl.edu.pw.mwo1.services.AuthorService;
+import pl.edu.pw.mwo1.services.APIService;
+import pl.edu.pw.mwo1.utils.ConfigHandler;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class AuthorViewModel {
     private final static int DATA_PER_PAGE = 10;
-    private final AuthorService service;
+    private final APIService<AuthorDto> service;
     @Getter
     private final IntegerProperty pageQuantProperty;
     private List<AuthorDto> authors;
@@ -22,7 +23,7 @@ public class AuthorViewModel {
     private final ListProperty<AuthorDto> authorsOnPage;
 
     public AuthorViewModel() {
-        this.service = new AuthorService();
+        this.service = new APIService<>(ConfigHandler.getConfig().getAuthor());
         this.authorsOnPage = new SimpleListProperty<>(FXCollections.observableList(new ArrayList<>()));
         this.pageQuantProperty = new SimpleIntegerProperty(1);
         this.authors = new ArrayList<>();
